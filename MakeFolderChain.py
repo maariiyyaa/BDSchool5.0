@@ -39,7 +39,7 @@ def main():
         print("Container already exists.")
         new_container = service.get_file_system_client(file_system="testcontainer")
 
-    CreateChain_UploadFile('Dir11\\Dir22\\Dir33\\Dir44\\Dir55', 3, "BondarMariia_test.csv")
+    CreateChain_UploadFile('Dir11\\Dir22\\Dir33\\Dir44\\Dir55', 4, "BondarMariia_test.csv")
 
 if __name__ == '__main__':
     main()
