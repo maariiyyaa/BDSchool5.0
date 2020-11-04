@@ -36,9 +36,9 @@ def upload_file(dir_name: str, file_name: str) -> None:
     try:
         directory_client = container.get_directory_client(dir_name)
         file_client = directory_client.create_file(file_name)
-        with open(file_name, 'rb') as file_contents:
-            file_client.append_data(data=file_contents.read(), offset=0, length=len(file_contents.read()))
-            file_client.flush_data(len(file_contents.read()))
+        file_contents = open(file_name, 'rb').read()
+        file_client.append_data(data=file_contents, offset=0, length=len(file_contents))
+        file_client.flush_data(len(file_contents))
     except ResourceExistsError:
         print("This file already exists.")
 
