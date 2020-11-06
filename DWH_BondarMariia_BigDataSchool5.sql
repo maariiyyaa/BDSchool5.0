@@ -1,5 +1,5 @@
 create login mbondar
-with password 'qwer#1234'
+with password 'pass'
 ---------
 create schema bondar_schema;
 go
