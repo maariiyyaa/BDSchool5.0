@@ -14,14 +14,14 @@ go
 create database  scoped credential AccessInvoice1
 with
 	identity = 'shared_signature',
-	secret = '+IpKEZ1k94Ti3k6FqmeRSqBM30AReWYnTWhryS7UIVGpEE9GKpJ+vmM8E07BKAa6dZ5FSPfw0uVixFMY9EozHw==';
+	secret = 'Access Key';
 
 go
 
 create external data source AzureSource
 with
  (
-	location = 'abfss://container002@bdschool002.dfs.core.windows.net',
+	location = 'abfss://container@storage.dfs.core.windows.net',
 	credential = AccessInvoice1,
 	type = HADOOP);
 
