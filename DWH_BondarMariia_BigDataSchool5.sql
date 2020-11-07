@@ -82,41 +82,42 @@ go
 -- Create a new table bondar_schema.Vendor
 create table bondar_schema.Vendor
 (
-	ID INT IDENTITY(0,1) NOT NULL,
+	ID tinyint  NOT NULL,
 	[Name] VARCHAR(50) NULL
 )
 with
 (
 	clustered columnstore index,
-	distribution = hash([Name])
+	distribution = hash(ID)
 );
 go
+
 -- Insert into table bondar_schema.Vendor VendorID description from bondar_schema.my_extable
 insert into bondar_schema.Vendor
-	select 
+	select  distinct VendorID,
 	case
 		when VendorID = 1 then 'Creative Mobile Technologies, LLC'
 		when VendorID = 2 then 'VeriFone Inc'
 		end 'Name'
-	from bondar_schema.my_extable;
+	from bondar_schema.my_extable);
 go
 
 -- Create a new table bondar_schema.RateCode
 create table bondar_schema.RateCode
 (
-	ID INT IDENTITY(0,1) NOT NULL,
-	[Name] VARCHAR(50) NULL
+	ID tinyint  NOT NULL,
+	[Name] varchar(50) NULL
 )
 with
 (
 	clustered columnstore index,
-	distribution = hash([Name])
+	distribution = hash(ID)
 );
 go
 
 -- Insert into table bondar_schema.RateCode RateCodeID description from bondar_schema.my_extable
 insert into bondar_schema.RateCode
-	select 
+	select distinct RatecodeID,
 	case
 		when RatecodeID = 1 then 'Standart rate'
 		when RatecodeID = 2 then 'JFK'
@@ -131,26 +132,26 @@ go
 -- Create a new table bondar_schema.Payment_type
 create table bondar_schema.Payment_type
 (
-	ID INT IDENTITY(0,1) NOT NULL,
+	ID tinyint  NOT NULL,
 	[Name] VARCHAR(50) NULL
 )
 with
 (
 	clustered columnstore index,
-	distribution = hash([Name])
+	distribution = hash(ID)
 );
 go
 
 -- Insert into table bondar_schema.Payment_type Payment_type description from bondar_schema.my_extable
 insert into bondar_schema.Payment_type
-	select 
-	case
-		when payment_type = 1 then 'Credit card'
-		when payment_type = 2 then 'Cash'
-		when payment_type = 3 then 'No charge'
-		when payment_type = 4 then 'Dispute'
-		when payment_type = 5 then 'Unknown'
-		when payment_type = 6 then 'Voided trip'
+	select
+		distinct payment_type,
+		case
+			when payment_type = 1 then 'Credit card'
+			when payment_type = 2 then 'Cash'
+			when payment_type = 3 then 'No charge'
+			when payment_type = 4 then 'Dispute'
+			when payment_type = 5 then 'Unknown'
+			when payment_type = 6 then 'Voided trip'
 		end 'Name'
 	from bondar_schema.my_extable;
-
