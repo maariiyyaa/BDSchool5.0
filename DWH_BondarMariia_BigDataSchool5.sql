@@ -34,7 +34,7 @@ with (
 go
 
 -- Create a new external table bondar_schema.my_extable
-CREATE EXTERNAL TABLE bondar_schema.my_extable (
+Create external table bondar_schema.my_extable (
    VendorID tinyint,
    tpep_pickup_datetime datetime not null,
    tpep_dropoff_datetime datetime not null,
@@ -77,7 +77,6 @@ with
 as
 	select * 
 	from bondar_schema.my_extable;
-
 go
 
 -- Create a new table bondar_schema.Vendor
@@ -119,16 +118,14 @@ go
 insert into bondar_schema.RateCode
 	select 
 	case
-		when VendorID = 1 then 'Standart rate'
-		when VendorID = 2 then 'JFK'
-		when VendorID = 3 then 'Newark'
-		when VendorID = 4 then 'Nassau or Westchester'
-		when VendorID = 5 then 'Negotiated fare'
-		when VendorID = 6 then 'Group ride'
-
+		when RatecodeID = 1 then 'Standart rate'
+		when RatecodeID = 2 then 'JFK'
+		when RatecodeID = 3 then 'Newark'
+		when RatecodeID = 4 then 'Nassau or Westchester'
+		when RatecodeID = 5 then 'Negotiated fare'
+		when RatecodeID = 6 then 'Group ride'
 		end 'Name'
 	from bondar_schema.my_extable;
-
 go
 
 -- Create a new table bondar_schema.Payment_type
@@ -148,12 +145,12 @@ go
 insert into bondar_schema.Payment_type
 	select 
 	case
-		when VendorID = 1 then 'Credit card'
-		when VendorID = 2 then 'Cash'
-		when VendorID = 3 then 'No charge'
-		when VendorID = 4 then 'Dispute'
-		when VendorID = 5 then 'Unknown'
-		when VendorID = 6 then 'Voided trip'
+		when payment_type = 1 then 'Credit card'
+		when payment_type = 2 then 'Cash'
+		when payment_type = 3 then 'No charge'
+		when payment_type = 4 then 'Dispute'
+		when payment_type = 5 then 'Unknown'
+		when payment_type = 6 then 'Voided trip'
 		end 'Name'
 	from bondar_schema.my_extable;
 
